@@ -42,7 +42,7 @@ pipeline {
 //       }
 //     }
   }
-  triggers {
-    // pollSCM('*/1 H * * *')
-  }
+  // triggers {
+  //   // pollSCM('*/1 H * * *')
+  // }
 }
