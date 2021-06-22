@@ -2,6 +2,7 @@ pipeline {
   agent {
     docker {
        image 'sgoryunov/build_image:latest'
+       args '-v /var/run/docker.sock:/var/run/docker.sock -u root:root'
     }
   }
 
@@ -27,7 +28,6 @@ pipeline {
         sh 'docker push sgoryunov/prod_image'
       }
     }
-
 //     stage('Run docker on prod instance') {
 //       steps {
 //         sh 'ssh-keyscan -H 13.51.107.128 >> ~/.ssh/known_hosts'
