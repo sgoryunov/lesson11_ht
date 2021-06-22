@@ -3,6 +3,7 @@ pipeline {
     docker {
        image 'sgoryunov/build_image:latest'
        args '-v /var/lib/jenkins/workspace/Lesson11_ht:/tmp'
+
     }
   }
 
