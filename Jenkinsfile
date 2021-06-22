@@ -2,7 +2,6 @@ pipeline {
   agent {
     docker {
        image 'sgoryunov/build_image:latest'
-       args '-v /var/lib/jenkins/workspace/Lesson11_ht:/tmp'
     }
   }
 
@@ -21,12 +20,11 @@ pipeline {
 
     stage('Make docker image') {
       steps {
-        sh 'ls -al'
-        sh 'ls -al /tmp'
-        // sh 'docker build -t prod_image .'
-        // sh 'docker tag prod_image sgoryunov/prod_image'
-        // sh 'docker login -u sgoryunov -p sophiaHu84'
-        // sh 'docker push sgoryunov/prod_image'
+        sh 'ls al'
+        sh 'docker build -t prod_image .'
+        sh 'docker tag prod_image sgoryunov/prod_image'
+        sh 'cat secret | docker login -u sgoryunov --password-stdin'
+        sh 'docker push sgoryunov/prod_image'
       }
     }
 
