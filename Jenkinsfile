@@ -1,15 +1,13 @@
 pipeline {
   agent {
-
     docker {
        image 'sgoryunov/build_image:latest'
+       args '-v /var/lib/jenkins/workspace/Lesson11_ht:/tmp'
     // socket!!!
     }
-
   }
 
   stages {
-
     stage('Git clone') {
       steps {
         git 'https://github.com/sgoryunov/lesson11.git'
