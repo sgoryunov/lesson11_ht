@@ -9,22 +9,24 @@ pipeline {
   stages {
     stage('Git clone') {
       steps {
-        git 'https://github.com/sgoryunov/lesson11.git'
+        sh  'git clone https://github.com/sgoryunov/lesson11.git'
       }
     }
 
     stage('Build war') {
       steps {
-        sh 'mvn package'
+        sh 'cd lesson11 && mvn package'
       }
     }
 
     stage('Make docker image') {
       steps {
-        sh 'docker build -t prod_image /tmp/'
-        sh 'docker tag prod_image sgoryunov/prod_image'
-        sh 'docker login -u sgoryunov -p sophiaHu84'
-        sh 'docker push sgoryunov/prod_image'
+        sh 'ls -al'
+        sh 'ls -al /tmp'
+        // sh 'docker build -t prod_image .'
+        // sh 'docker tag prod_image sgoryunov/prod_image'
+        // sh 'docker login -u sgoryunov -p sophiaHu84'
+        // sh 'docker push sgoryunov/prod_image'
       }
     }
 
