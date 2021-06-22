@@ -20,7 +20,7 @@ pipeline {
 
     stage('Make docker image') {
       steps {
-        sh 'ls al'
+        sh 'ls -al'
         sh 'docker build -t prod_image .'
         sh 'docker tag prod_image sgoryunov/prod_image'
         sh 'cat secret | docker login -u sgoryunov --password-stdin'
