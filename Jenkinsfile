@@ -3,7 +3,6 @@ pipeline {
     docker {
        image 'sgoryunov/build_image:latest'
        args '-v /var/lib/jenkins/workspace/Lesson11_ht:/tmp'
-
     }
   }
 
@@ -20,14 +19,14 @@ pipeline {
       }
     }
 
-    // stage('Make docker image') {
-    //   steps {
-    //     sh 'docker build -t prod_image /tmp/'
-    //     sh 'docker tag prod_image sgoryunov/prod_image'
-    //     sh 'docker login -u sgoryunov -p sophiaHu84'
-    //     sh 'docker push sgoryunov/prod_image'
-    //   }
-    // }
+    stage('Make docker image') {
+      steps {
+        sh 'docker build -t prod_image /tmp/'
+        sh 'docker tag prod_image sgoryunov/prod_image'
+        sh 'docker login -u sgoryunov -p sophiaHu84'
+        sh 'docker push sgoryunov/prod_image'
+      }
+    }
 
 //     stage('Run docker on prod instance') {
 //       steps {
