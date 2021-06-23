@@ -33,6 +33,7 @@ pipeline {
       steps {
         sh 'ssh-keyscan -H 13.51.107.128 >> ~/.ssh/known_hosts'
         sh '''ssh jenkins@13.51.107.128 << EOF
+        docker kill $(docker ps -q)
         docker run -d -p 8080:8080 sgoryunov/prod_image
 EOF'''
       }
