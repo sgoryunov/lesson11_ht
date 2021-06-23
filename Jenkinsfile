@@ -31,11 +31,8 @@ pipeline {
     }
     stage('Run docker on prod instance') {
       steps {
-        sh 'ssh-keyscan -H 13.51.107.128 >> ~/.ssh/known_hosts'
-        sh '''ssh jenkins@13.51.107.128 << EOF
-        docker kill $(docker ps -q)
-        docker run -d -p 8080:8080 sgoryunov/prod_image
-EOF'''
+        sh 'ssh-keyscan -H 13.49.70.73 >> ~/.ssh/known_hosts'
+        sh 'ssh jenkins@13.49.70.73 "docker rm -f one && docker run -d -p 80:8080 --name one sgoryunov/prod_image"'
       }
     }
   }
