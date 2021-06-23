@@ -9,6 +9,7 @@ pipeline {
   stages {
     stage('Git clone') {
       steps {
+        sh  'rm -rf lesson11'
         sh  'git clone https://github.com/sgoryunov/lesson11.git'
       }
     }
@@ -28,16 +29,14 @@ pipeline {
         sh 'docker push sgoryunov/prod_image'
       }
     }
-//     stage('Run docker on prod instance') {
-//       steps {
-//         sh 'ssh-keyscan -H 13.51.107.128 >> ~/.ssh/known_hosts'
-//         sh '''ssh jenkins@13.51.107.128 << EOF
-// 	sudo docker pull devcvs-srv01:5000/shop2-backend/gateway-api:2-staging
-// 	cd /etc/shop/docker
-// 	sudo docker-compose up -d
-// EOF'''
-//       }
-//     }
+    stage('Run docker on prod instance') {
+      steps {
+        sh 'ssh-keyscan -H 13.51.107.128 >> ~/.ssh/known_hosts'
+        sh '''ssh jenkins@13.51.107.128 << EOF
+        docker run -d -p 8080:8080 sgoryunov/prod_image
+EOF'''
+      }
+    }
   }
   // triggers {
   //   // pollSCM('*/1 H * * *')
